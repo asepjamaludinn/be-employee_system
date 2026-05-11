@@ -21,4 +21,13 @@ class LeaveRequestRepository
         $leaveRequest->update($data);
         return $leaveRequest;
     }
+    public function getAll()
+    {
+        return LeaveRequest::with('user:id,name,email,role')->latest()->get();
+    }
+
+    public function getByUserId(int $userId)
+    {
+        return LeaveRequest::where('user_id', $userId)->latest()->get();
+    }
 }

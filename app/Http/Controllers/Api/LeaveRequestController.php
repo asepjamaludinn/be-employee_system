@@ -57,4 +57,15 @@ class LeaveRequestController extends Controller
             'data' => $result
         ]);
     }
+    public function index(Request $request)
+    {
+        $user = $request->user();
+        
+        $result = $this->leaveRequestService->getLeaveRequests($user);
+
+        return response()->json([
+            'message' => 'Berhasil mengambil daftar pengajuan cuti.',
+            'data' => $result
+        ]);
+    }
 }

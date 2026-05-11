@@ -80,4 +80,12 @@ class LeaveRequestService
             ]);
         });
     }
+    public function getLeaveRequests($user)
+    {
+        if ($user->role === 'admin') {
+            return $this->leaveRequestRepository->getAll();
+        }
+
+        return $this->leaveRequestRepository->getByUserId($user->id);
+    }
 }

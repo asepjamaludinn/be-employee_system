@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Services\LeaveRequestService;
 use App\DTOs\CreateLeaveRequestDTO;
+use App\DTOs\UpdateLeaveRequestStatusDTO;
 use Illuminate\Http\Request;
 
 class LeaveRequestController extends Controller
@@ -36,5 +37,24 @@ class LeaveRequestController extends Controller
             'message' => 'Pengajuan cuti berhasil dibuat dan menunggu persetujuan.',
             'data' => $result
         ], 201);
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:approved,rejected'
+        ]);
+
+        $dto = new UpdateLeaveRequestStatusDTO(
+            (int) $id,
+            $request->status
+        );
+
+        $result = $this->leaveRequestService->updateStatus($dto);
+
+        return response()->json([
+            'message' => 'Status pengajuan cuti berhasil diperbarui.',
+            'data' => $result
+        ]);
     }
 }

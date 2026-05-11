@@ -12,5 +12,10 @@ Route::get('/auth/google/redirect', [AuthController::class, 'redirectToGoogle'])
 Route::get('/auth/google/callback', [AuthController::class, 'handleGoogleCallback']);
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/leave-requests', [LeaveRequestController::class, 'store']);
+   Route::post('/leave-requests', [LeaveRequestController::class, 'store']);
+    
+    Route::middleware('admin')->group(function () {
+        Route::patch('/leave-requests/{id}/status', [LeaveRequestController::class, 'updateStatus']);
+    });
+    
 });

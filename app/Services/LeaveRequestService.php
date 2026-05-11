@@ -4,8 +4,10 @@ namespace App\Services;
 
 use App\Repositories\LeaveRequestRepository;
 use App\DTOs\CreateLeaveRequestDTO;
+use App\DTOs\UpdateLeaveRequestStatusDTO;
 use Carbon\Carbon;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\DB;
 
 class LeaveRequestService
 {
@@ -15,7 +17,6 @@ class LeaveRequestService
 
     public function createRequest(CreateLeaveRequestDTO $data)
     {
-
         $start = Carbon::parse($data->startDate);
         $end = Carbon::parse($data->endDate);
         
@@ -46,5 +47,37 @@ class LeaveRequestService
             'attachment' => $attachmentPath,
             'status' => 'pending' 
         ]);
+    }
+
+    public function updateStatus(UpdateLeaveRequestStatusDTO $data)
+    {
+        return DB::transaction(function () use ($data) {
+            $leaveRequest = $this->leaveRequestRepository->findById($data->leaveRequestId);
+
+            if ($leaveRequest->status !== 'pending') {
+                throw ValidationException::withMessages([
+                    'status' => ['Pengajuan ini sudah diproses dan tidak dapat diubah lagi.']
+                ]);
+            }
+
+            if ($data->status === 'approved') {
+                $user = $leaveRequest->user;
+                $start = Carbon::parse($leaveRequest->start_date);
+                $end = Carbon::parse($leaveRequest->end_date);
+                $requestedDays = $start->diffInDays($end) + 1;
+
+                if ($user->leave_quota < $requestedDays) {
+                    throw ValidationException::withMessages([
+                        'leave_quota' => ['Sisa kuota cuti karyawan tidak mencukupi untuk disetujui.']
+                    ]);
+                }
+
+                $user->decrement('leave_quota', $requestedDays);
+            }
+
+            return $this->leaveRequestRepository->update($leaveRequest, [
+                'status' => $data->status
+            ]);
+        });
     }
 }

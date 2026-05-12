@@ -59,7 +59,7 @@ Berikut adalah panduan langkah demi langkah untuk menjalankan proyek ini di mesi
     DB_USERNAME=postgres.idaoxaopupweksasmneqxc
     DB_PASSWORD="<akan_dikirimkan_terpisah_via_email>"
 
-    z5 7# Setup Google OAuth
+    # Setup Google OAuth
     GOOGLE_CLIENT_ID="<akan_dikirimkan_terpisah_via_email>"
     GOOGLE_CLIENT_SECRET="<akan_dikirimkan_terpisah_via_email>"
     GOOGLE_REDIRECT_URI="http://127.0.0.1:8000/api/auth/google/callback"

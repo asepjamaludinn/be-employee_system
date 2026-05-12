@@ -1,5 +1,7 @@
 # Leave Management System API
 
+**Postman API Documentation:** [Klik di sini untuk melihat Dokumentasi API](https://documenter.getpostman.com/view/39954677/2sBXqQEHJa)
+
 ## System Architecture & Data Flow
 
 Sistem ini dibangun menggunakan pendekatan **Clean Architecture** dengan menerapkan pola **Service-Repository** dan **Data Transfer Objects (DTO)** untuk memastikan pemisahan tanggung jawab (_Separation of Concerns_) yang jelas, skalabilitas, dan kemudahan pengujian (_maintainability_).

@@ -1,0 +1,206 @@
+{
+  "info": {
+    "_postman_id": "7ac41305-6dda-4d68-bc63-121c82910361",
+    "name": "Employee Project",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "39954677"
+  },
+  "item": [
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"admin@perusahaan.com\",\r\n    \"password\": \"password123\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/login",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login Oauth",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/auth/google/redirect",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "auth",
+            "google",
+            "redirect"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Pengajuan Cuti",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "4|JU71dXXoRd3Gw2dbBuybg2fpzcyOSwXLtMrc3QFm4870e826",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "start_date",
+              "value": "2026-05-15",
+              "type": "text",
+              "uuid": "626f963c-45cc-40f2-b2ac-d8f238c5b5c0"
+            },
+            {
+              "key": "end_date",
+              "value": "2026-05-18",
+              "type": "text",
+              "uuid": "18e16087-e502-419a-8cb4-118fa40f7104"
+            },
+            {
+              "key": "reason",
+              "value": "Acara keluarga",
+              "type": "text",
+              "uuid": "212c48ca-7598-490f-9c17-3ba1a63ef9d1"
+            },
+            {
+              "key": "attachment",
+              "type": "file",
+              "uuid": "563e900c-dac3-4e37-87e9-1ff548e0cbcc",
+              "src": "postman-cloud:///1f14d4ea-0965-42b0-987a-a8fac986d48d"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/leave-requests",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "leave-requests"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Approval",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "5|m7YEPfPrZIH3nsEzgVnyVaaRNvgjA8TQxgR2Hu2T84a498b1",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"status\": \"approved\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/leave-requests/1/status",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "leave-requests",
+            "1",
+            "status"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Melihat daftar cuti",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "6|bUHMMhCgnWKpn6xSyZdNXabzkviaSSc1j0zD2Vr80abcdb0d",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/leave-requests",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "leave-requests"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

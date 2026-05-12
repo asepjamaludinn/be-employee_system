@@ -23,8 +23,8 @@ Follow these steps to run the project on your local machine:
 
 1.  **Clone the repository**
     ```bash
-    git clone <your-github-repo-url>
-    cd <your-folder-name>
+    git clone https://github.com/asepjamaludinn/be-employee_system.git
+    cd be-employee_system
     ```
 2.  **Install dependencies**
 
